@@ -1,0 +1,24 @@
+ 
+.row
+  .col-md-4
+    .user_info
+      %td
+        =  image_tag @user.avatar.url(:thumb)
+      %td
+        %ul
+          %li 
+            %td
+              Name: 
+              =@user.name
+          %li
+            %td
+              Email: 
+              =@user.email 
+          %li
+            %td
+              Address: 
+              =@user.address
+          %li
+            %td
+              Phone : 
+              =@user.phone 

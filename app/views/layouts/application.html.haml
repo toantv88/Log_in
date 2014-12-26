@@ -1,0 +1,12 @@
+%html
+  %head
+    %title=(content_for?(:title) ? "#{yield(:title)} | " : "") + "foundation-rails" 
+    = stylesheet_link_tag  'application' 
+    = javascript_include_tag 'vendor/modernizr' 
+    = javascript_include_tag 'application' 'data-turbolinks-track' => true
+    = csrf_meta_tags 
+  %body
+    = render 'layouts/header' 
+    = yield    
+    = render 'layouts/foot' 
+    = javascript_include_tag "application"

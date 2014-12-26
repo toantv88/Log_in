@@ -1,0 +1,22 @@
+%h1 Sign up
+.row
+  .cold-md-6.cod-md-offset-3
+    = form_for @user, :html => { :multipart => true , :name => 'new_user'} do |f|
+      
+      %p
+        = f.label :name
+        = f.text_field :name , :'data-validation'=>"required"
+      %p
+        = f.label :email
+        = f.text_field :email , :'data-validation'=>"required email"
+      %p
+        = f.label :password
+        = f.password_field :password , :'data-validation'=>"required length validate_confirmation",:'data-validation-length'=>"min6"
+      %p
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, :'data-validation-confirmation' => "password"
+      %p
+        = f.file_field :avatar
+        = f.submit "Create account"
+
+
