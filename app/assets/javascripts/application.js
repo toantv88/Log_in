@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require_tree . 
 
+
 $(function(){ $(document).foundation(); });
 
 $.validate({
@@ -39,8 +40,8 @@ $(document).ready(function () {
             "user[name]": {
                 required: true
             },
+            "user[password]": {minlength: 6} ,
             "user[password_confirmation]":{
-
               equalTo: "#user_password"
             }
         }
