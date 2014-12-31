@@ -19,13 +19,15 @@
 
 $(function(){ $(document).foundation(); });
 
-$.validate({
+
+$("#new_user").ready(function () {
+	$.validate({
 	modules : 'users'
 	});
-$(document).ready(function () {
 	$("#new_user").validate({
+		keyup : true,
 		rules: {
-			"user[email]": {email: true, remote:"/users/check_email" },  //added this
+			"user[email]": {email: true, remote:"/users/check_email" },  
 			"user[password]": {minlength: 6},
 			"user[password_confirmation]": {equalTo: "#user_password"}
 		}

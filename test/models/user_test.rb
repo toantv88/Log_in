@@ -4,7 +4,6 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCasedef setup
     @user = User.new(name: "Example User", email: "user@example.com")
   end
-
   test "should be valid" do
     assert @user.valid?
   end
@@ -53,6 +52,6 @@ class UserTest < ActiveSupport::TestCasedef setup
   end
 
   test "authenticated? should return false for a user with nil digest" do
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?('');
   end
 end

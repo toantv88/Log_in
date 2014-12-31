@@ -1,5 +1,7 @@
 %script{:type => "text/javascript", :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
 %h1 Upadate profile
+%p
+  = @users
 .row
   .cod-md-6.cod-md-offset-3
     = form_for @user,:html => {:multipart=> true ,:name=>"edit_user", :id=>"edit_user"} do |f|
@@ -76,5 +78,5 @@
         return true;
       }
     });  
-  })
-
+  });
+  

@@ -1,5 +1,4 @@
-%script{:type => "text/javascript",
-        :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+
 %h1 Sign up
 .row
   .cold-md-6.cod-md-offset-3
@@ -8,20 +7,19 @@
       %p
         = f.label :name
         = f.text_field :name ,:'data-validation'=>"required"
-        %span#name_error
+        %label.error#name_error
       %p
         = f.label :email
         = f.text_field :email , :'data-validation'=>"required email"
-        %span#email_error
+        %label.error#email_error
       %p
         = f.label :password
         = f.password_field :password , :'data-validation'=>"required length validate_confirmation",:'data-validation-length'=>"min6"
+        %label.error#password_error
       %p
         = f.label :password_confirmation
-        = f.password_field :password_confirmation, :'data-validation'=>"confirmation"
+        = f.password_field :password_confirmation
+        %label.error#password_confirmation_error
       %p
         = f.file_field :avatar
         = f.submit "Create account"
-
-
-    
