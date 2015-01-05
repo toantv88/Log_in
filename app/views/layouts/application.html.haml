@@ -5,8 +5,9 @@
     = javascript_include_tag 'vendor/modernizr' 
     = javascript_include_tag 'application' 'data-turbolinks-track' => true
     = csrf_meta_tags 
+    = javascript_include_tag "application"
   %body
     = render 'layouts/header' 
     = yield    
     = render 'layouts/foot' 
-    = javascript_include_tag "application"
+    
