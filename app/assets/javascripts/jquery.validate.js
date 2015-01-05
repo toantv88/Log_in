@@ -325,7 +325,8 @@ $.extend( $.validator, {
 		rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
 		range: $.validator.format( "Please enter a value between {0} and {1}." ),
 		max: $.validator.format( "Please enter a value less than or equal to {0}." ),
-		min: $.validator.format( "Please enter a value greater than or equal to {0}." )
+		min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
+		required_group:$.validator.format("You must input {0} in fields.")
 	},
 
 	autoCreateRanges: false,
@@ -1113,11 +1114,14 @@ $.extend( $.validator, {
 
 		// http://jqueryvalidation.org/required-method/
 		required: function( value, element, param ) {
+			
 			// check if dependency is met
 			if ( !this.depend( param, element ) ) {
+				
 				return "dependency-mismatch";
 			}
 			if ( element.nodeName.toLowerCase() === "select" ) {
+				
 				// could be an array for select-multiple or a string, both are fine this way
 				var val = $( element ).val();
 				return val && val.length > 0;
@@ -1125,7 +1129,8 @@ $.extend( $.validator, {
 			if ( this.checkable( element ) ) {
 				return this.getLength( value, element ) > 0;
 			}
-			return $.trim( value ).length > 0;
+			
+			return $.trim( value ).length >= 0;
 		},
 
 		// http://jqueryvalidation.org/email-method/
@@ -1304,8 +1309,53 @@ $.extend( $.validator, {
 				}
 			}, param ) );
 			return "pending";
-		}
-
+		},
+		// validate group field
+		required_group: function(value, element, param ){
+			var validator = this;
+    		var minRequired = param[0];
+    		
+    		var selector = param[1];
+    		var validOrNot = jQuery(selector, element.form).filter(function () {
+        		return validator.elementValue(this);
+    		}).length >= minRequired;
+    		
+    		jQuery(selector, element.form).off('.required_group');
+			
+    		if (this.settings.onkeyup) {
+    			
+        		jQuery(selector, element.form).on({
+            		'keyup.required_group': function (e) {
+                		jQuery(selector, element.form).valid();
+            		}
+        		});
+    		}
+    		if (this.settings.onfocusin) {
+    			
+        		jQuery(selector, element.form).on({
+            		'focusin.required_group': function (e) {
+                		jQuery(selector, element.form).valid();
+            		}
+        		});
+    		}
+    		if (this.settings.click) {
+    			
+        		jQuery(selector, element.form).on({
+            		'click.required_group': function (e) {
+                		jQuery(selector, element.form).valid();
+            		}
+        		});
+    		}
+    		if (this.settings.focusout) {
+    			
+        		jQuery(selector, element.form).on({
+            		'focusout.required_group': function (e) {
+                		jQuery(selector, element.form).valid();
+            		}
+        		});
+    		}
+    		return validOrNot;
+			}  			
 	}
 
 });

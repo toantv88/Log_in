@@ -1,4 +1,5 @@
 %script{:type => "text/javascript", :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+-# %script{:src=>"http://jqueryvalidation.org/files/dist/additional-methods.min.js"}
 %h1 Upadate profile
 %p
   = @users
@@ -10,10 +11,10 @@
         = f.text_field :name
       %p
         = f.label :Phone
-        = f.text_field :phone  
+        = f.text_field :phone  , :class =>"phone-address"
       %p
         = f.label :Address
-        = f.text_field :address 
+        = f.text_field :address  ,:class =>"phone-address"
         %label.help-block.error#test
       %p
         = f.label :Password
@@ -47,36 +48,57 @@
 /     }
 /   }
 
+-# :javascript
+  -# $(document).ready(function (){
+    -# $("#edit_user").keyup(function checkvalid(){
+      -# var phone = $('#user_phone').val();
+      -# var address = $('#user_address').val();
+      -# if(phone =="" && address =="")
+      -# {
+        -# $('#test').text('You must input phone or address');
+        -# return false;
+      -# }
+      -# else
+      -# {
+        -# $("#test").text("")
+        -# return true;
+      -# }
+    -# });
+-#      
+    -# $("#edit_user").click("#commit",function commit(){    
+      -# var phone = $('#user_phone').val();
+      -# var address = $('#user_address').val();
+      -# if(phone =="" && address =="")
+      -# {
+        -# $("#test").text('You must input phone or address');
+        -# return false;
+      -# }
+      -# else
+      -# {
+        -# $("#test").text("")
+        -# return true;
+      -# }
+    -# });  
+  -# });  
+  
 :javascript
   $(document).ready(function (){
-    $("#edit_user").keyup(function checkvalid(){
-      var phone = $('#user_phone').val();
-      var address = $('#user_address').val();
-      if(phone =="" && address =="")
-      {
-        $('#test').text('You must input phone or address');
-        return false;
-      }
-      else
-      {
-        $("#test").text("")
-        return true;
-      }
-    });
     
-    $("#edit_user").click("#commit",function commit(){    
-      var phone = $('#user_phone').val();
-      var address = $('#user_address').val();
-      if(phone =="" && address =="")
-      {
-        $("#test").text('You must input phone or address');
-        return false;
-      }
-      else
-      {
-        $("#test").text("")
-        return true;
-      }
-    });  
+    $("#edit_user").validate({
+    
+      rules:{
+        "user[phone]": {
+          required_group: [1 , ".phone-address"],
+          number: true
+        },
+        "user[address]":{
+          required_group:[1 , ".phone-address"]
+        },
+        "user[password]": {required: true ,minlength: 6},
+        "user[password_confirmation]": {equalTo: "#user_password"}
+      } 
+      
+    })
+    
   });
   

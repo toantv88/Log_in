@@ -15,38 +15,55 @@
 //= require foundation
 //= require turbolinks
 //= require_tree . 
+//= requery jquery.min
+//= requery jquery.validate
 
 
-$(function(){ $(document).foundation(); });
+// $(function(){ $(document).foundation(); });
 
 
-$("#new_user").ready(function () {
-	$.validate({
-	modules : 'users'
-	});
-	$("#new_user").validate({
-		keyup : true,
-		rules: {
-			"user[email]": {email: true, remote:"/users/check_email" },  
-			"user[password]": {minlength: 6},
-			"user[password_confirmation]": {equalTo: "#user_password"}
-		}
-	});
-});
-
-$(document).ready(function () {
-
-    $("#edit_user").validate({
-      
-        rules: {
-            "user[name]": {
-                required: true
-            },
-            "user[password]": {minlength: 6} ,
-            "user[password_confirmation]":{
-              equalTo: "#user_password"
-            }
-        }
-    });
-
-});
+ // function required_form_group(value, element, param ){
+			// var validator = this;
+    		// var minRequired = param[0];
+//     		
+    		// var selector = param[1];
+    		// var validOrNot = jQuery(selector, element.form).filter(function () {
+        		// return validator.elementValue(this);
+    		// }).length >= minRequired;
+//     		
+    		// jQuery(selector, element.form).off('.required_form_group');
+// 
+    		// if (this.settings.onkeyup) {
+        		// jQuery(selector, element.form).on({
+            		// 'keyup.required_form_group': function (e) {
+                		// jQuery(selector, element.form).valid();
+            		// }
+        		// });
+    		// }
+    		// if (this.settings.onfocusin) {
+        		// jQuery(selector, element.form).on({
+            		// 'focusin.required_form_group': function (e) {
+                		// jQuery(selector, element.form).valid();
+            		// }
+        		// });
+    		// }
+    		// if (this.settings.click) {
+        		// jQuery(selector, element.form).on({
+            		// 'click.required_form_group': function (e) {
+                		// jQuery(selector, element.form).valid();
+            		// }
+        		// });
+    		// }
+    		// if (this.settings.focusout) {
+        		// jQuery(selector, element.form).on({
+            		// 'focusout.required_form_group': function (e) {
+                		// jQuery(selector, element.form).valid();
+            		// }
+        		// });
+    		// }
+// 			
+    		// return validOrNot;
+    		// jQuery.format("You must input ");
+// };
+// 			
+			

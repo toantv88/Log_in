@@ -1,6 +1,6 @@
-class UsersController < ApplicationController
-   # skip_before_filter :authenticate_user
-  before_action :correct_user ,  only: [:edit, :show]
+class UsersController < CustomerController
+   skip_before_filter :authenticate_user , only:[:new]
+  # before_action :correct_user ,  only: [:edit, :show]
   def check_email
     @user = User.find_by(:email =>params[:user][:email])
 
@@ -49,12 +49,12 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password,:password_confirmation, :avatar, :phone ,:address )
   end
- def correct_user
-    @user = User.find(params[:id])
-    if @user.nil?
-      redirect_to :action =>'home', :controller => "homes"
-    else
-      redirect_to(root_url) unless @user == current_user
-    end
-  end
+ # def correct_user
+    # @user = User.find(params[:id])
+    # if @user.nil?
+      # redirect_to :action =>'home', :controller => "homes"
+    # else
+      # redirect_to(root_url) unless @user == current_user
+    # end
+  # end
 end

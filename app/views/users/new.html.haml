@@ -1,4 +1,4 @@
-
+%script{:type => "text/javascript", :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
 %h1 Sign up
 .row
   .cold-md-6.cod-md-offset-3
@@ -6,15 +6,15 @@
       
       %p
         = f.label :name
-        = f.text_field :name ,:'data-validation'=>"required"
+        = f.text_field :name 
         %label.error#name_error
       %p
         = f.label :email
-        = f.text_field :email , :'data-validation'=>"required email"
+        = f.text_field :email 
         %label.error#email_error
       %p
         = f.label :password
-        = f.password_field :password , :'data-validation'=>"required length validate_confirmation",:'data-validation-length'=>"min6"
+        = f.password_field :password 
         %label.error#password_error
       %p
         = f.label :password_confirmation
@@ -23,3 +23,17 @@
       %p
         = f.file_field :avatar
         = f.submit "Create account"
+:javascript
+  $(document).ready(function () {
+    $("#new_user").validate({
+      onkeyup: true,
+      rules:{  
+        "user[name]": {required: true},
+        "user[email]": {email: true, 
+                        remote:"/users/check_email" },  
+        "user[password]":{required:  true,
+                        minlength: 6},
+        "user[password_confirmation]": {equalTo: "#user_password"}
+      }
+    });
+  });
