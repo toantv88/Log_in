@@ -1,6 +1,6 @@
 class UsersController < CustomerController
   skip_before_filter :authenticate_user , only:[:new, :check_email,:create]
-  # before_action :correct_user ,  only: [:edit, :show]
+  before_action :correct_user ,  only: [:edit, :show]
   def check_email
     @user = User.find_by(:email =>params[:user][:email])
 
@@ -66,12 +66,9 @@ class UsersController < CustomerController
       redirect_to user_path(current_user)
     end
   end
-# def correct_user
-# @user = User.find(params[:id])
-# if @user.nil?
-# redirect_to :action =>'home', :controller => "homes"
-# else
-# redirect_to(root_url) unless @user == current_user
-# end
-# end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
+  end
 end
