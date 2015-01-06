@@ -16,6 +16,7 @@
 
 $.extend($.fn, {
 	// http://jqueryvalidation.org/validate/
+	
 	validate: function( options ) {
 
 		// if nothing is selected, return nothing; can't chain anyway
@@ -179,6 +180,7 @@ $.extend($.fn, {
 			param = data.required;
 			delete data.required;
 			data = $.extend( { required: param }, data );
+			
 			$( element ).attr( "aria-required", "true" );
 		}
 
@@ -1114,7 +1116,7 @@ $.extend( $.validator, {
 
 		// http://jqueryvalidation.org/required-method/
 		required: function( value, element, param ) {
-			
+		
 			// check if dependency is met
 			if ( !this.depend( param, element ) ) {
 				
@@ -1123,14 +1125,15 @@ $.extend( $.validator, {
 			if ( element.nodeName.toLowerCase() === "select" ) {
 				
 				// could be an array for select-multiple or a string, both are fine this way
-				var val = $( element ).val();
+				var val = $(element).val();
 				return val && val.length > 0;
 			}
 			if ( this.checkable( element ) ) {
+				 
 				return this.getLength( value, element ) > 0;
-			}
-			
-			return $.trim( value ).length >= 0;
+			} 
+		
+			return $.trim( value ).length > 0;
 		},
 
 		// http://jqueryvalidation.org/email-method/

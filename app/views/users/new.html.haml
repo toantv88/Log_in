@@ -1,4 +1,3 @@
-%script{:type => "text/javascript", :src  => "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
 %h1 Sign up
 .row
   .cold-md-6.cod-md-offset-3
@@ -26,10 +25,15 @@
 :javascript
   $(document).ready(function () {
     $("#new_user").validate({
+       onfocusout: function(element) 
+       {
+         $(element).valid();
+       },
       onkeyup: true,
       rules:{  
         "user[name]": {required: true},
-        "user[email]": {email: true, 
+        "user[email]": {required: true,
+                        email: true, 
                         remote:"/users/check_email" },  
         "user[password]":{required:  true,
                         minlength: 6},

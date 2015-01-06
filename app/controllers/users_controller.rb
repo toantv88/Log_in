@@ -1,5 +1,5 @@
 class UsersController < CustomerController
-   skip_before_filter :authenticate_user , only:[:new]
+  skip_before_filter :authenticate_user , only:[:new, :check_email,:create]
   # before_action :correct_user ,  only: [:edit, :show]
   def check_email
     @user = User.find_by(:email =>params[:user][:email])
@@ -15,7 +15,7 @@ class UsersController < CustomerController
 
   def new
     @user = User.new
-  
+
   end
 
   def create
@@ -33,7 +33,7 @@ class UsersController < CustomerController
 
   def edit
     @user = User.find(params[:id])
-    
+
   end
 
   def update
@@ -49,12 +49,29 @@ class UsersController < CustomerController
   def user_params
     params.require(:user).permit(:name, :email, :password,:password_confirmation, :avatar, :phone ,:address )
   end
- # def correct_user
-    # @user = User.find(params[:id])
-    # if @user.nil?
-      # redirect_to :action =>'home', :controller => "homes"
-    # else
-      # redirect_to(root_url) unless @user == current_user
-    # end
-  # end
+
+  def destroy
+    @user = User.find(session[:user_id])
+    @user.avatar = nil
+    @user.save
+    redirect_to user_path(current_user)
+  end
+
+  def avatar_download
+    @user = User.find(params[:id])
+    file_path = @user.avatar_file_name
+    if !file_path.nil?
+      send_file "#{Rails.root}/public/system/users/avatars/000/000/#{@user.id}/original/#{file_path}", :x_sendfile => true
+    else
+      redirect_to user_path(current_user)
+    end
+  end
+# def correct_user
+# @user = User.find(params[:id])
+# if @user.nil?
+# redirect_to :action =>'home', :controller => "homes"
+# else
+# redirect_to(root_url) unless @user == current_user
+# end
+# end
 end

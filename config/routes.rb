@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   get 'logout'  => 'sessions#destroy'
   get 'users/check_email' => 'users#check_email'
+  delete 'delete'  => 'users#destroy'
   resources :users  
+  get 'users/avatar_download/:id' => "users#avatar_download"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

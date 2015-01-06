@@ -4,6 +4,12 @@
     .user_info
       %td
         =  image_tag @user.avatar.url(:thumb)
+      
+      %td
+        =link_to "download","/users/avatar_download/#{@user.id}"
+          
+      
+        =link_to "xoa" , delete_path ,  method: :delete, data: { confirm: 'Are you sure?' }
       %td
         %ul
           %li 

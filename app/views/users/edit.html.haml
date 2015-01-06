@@ -8,10 +8,12 @@
     = form_for @user,:html => {:multipart=> true ,:name=>"edit_user", :id=>"edit_user"} do |f|
       %p
         = f.label :Name
-        = f.text_field :name
+        = f.text_field :name 
+        %label.help-block.error#test
       %p
         = f.label :Phone
         = f.text_field :phone  , :class =>"phone-address"
+        %label.help-block.error#test
       %p
         = f.label :Address
         = f.text_field :address  ,:class =>"phone-address"
@@ -19,9 +21,11 @@
       %p
         = f.label :Password
         = f.password_field :password
+        %label.help-block.error#test
       %p
         = f.label :Confirmation
         = f.password_field :password_confirmation 
+        %label.help-block.error#test
       = f.file_field :avatar
       = f.submit "Save changes", :id =>"commit"
 / :javascript 
@@ -82,11 +86,19 @@
   -# });  
   
 :javascript
-  $(document).ready(function (){
-    
+  $("#edit_user").keyup(function (){
+  
     $("#edit_user").validate({
     
+       onfocusout: function(element) 
+       {
+         $(element).valid();
+       },
+       
+       
       rules:{
+        "user[name]": {
+          required: true},
         "user[phone]": {
           required_group: [1 , ".phone-address"],
           number: true
@@ -94,11 +106,10 @@
         "user[address]":{
           required_group:[1 , ".phone-address"]
         },
-        "user[password]": {required: true ,minlength: 6},
+        "user[password]": {minlength: 6},
         "user[password_confirmation]": {equalTo: "#user_password"}
       } 
       
-    })
-    
+    }); 
   });
   
