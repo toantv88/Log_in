@@ -1,5 +1,5 @@
 
--# %script{:src=>"http://jqueryvalidation.org/files/dist/additional-methods.min.js"}
+
 %h1 Upadate profile
 %p
   = @users
@@ -8,83 +8,23 @@
     = form_for @user,:html => {:multipart=> true ,:name=>"edit_user", :id=>"edit_user"} do |f|
       %p
         = f.label :Name
-        = f.text_field :name 
-        %label.help-block.error#test
+        = f.text_field :name  
       %p
         = f.label :Phone
-        = f.text_field :phone  , :class =>"phone-address"
-        %label.help-block.error#test
+        = f.text_field :phone  , :class =>"phone-address"        
       %p
         = f.label :Address
-        = f.text_field :address  ,:class =>"phone-address"
-        %label.help-block.error#test
+        = f.text_field :address  ,:class =>"phone-address"        
       %p
         = f.label :Password
-        = f.password_field :password
-        %label.help-block.error#test
+        = f.password_field :password       
       %p
         = f.label :Confirmation
         = f.password_field :password_confirmation 
-        %label.help-block.error#test
+        
       = f.file_field :avatar
       = f.submit "Save changes", :id =>"commit"
-/ :javascript 
-/   $(document).ready(function (){
-/     $(document).on("#commit", function(){
-/       checkvalidate();
-/     });
-/     $("#edit_user").keyup(function(){
-/       checkvalidate();
-/     }); 
-/   });
-/   function checkvalidate(){
-/     var phone = $('#user_phone').val();
-/     var address = $('#user_address').val();
-/     if(phone =="" && address =="")
-/     {
-/       $('#test').text('You must input phone or address');
-/       return false;
-/     }
-/     else
-/     {
-/       $("#test").text("")
-/       return true;
-/     }
-/   }
 
--# :javascript
-  -# $(document).ready(function (){
-    -# $("#edit_user").keyup(function checkvalid(){
-      -# var phone = $('#user_phone').val();
-      -# var address = $('#user_address').val();
-      -# if(phone =="" && address =="")
-      -# {
-        -# $('#test').text('You must input phone or address');
-        -# return false;
-      -# }
-      -# else
-      -# {
-        -# $("#test").text("")
-        -# return true;
-      -# }
-    -# });
--#      
-    -# $("#edit_user").click("#commit",function commit(){    
-      -# var phone = $('#user_phone').val();
-      -# var address = $('#user_address').val();
-      -# if(phone =="" && address =="")
-      -# {
-        -# $("#test").text('You must input phone or address');
-        -# return false;
-      -# }
-      -# else
-      -# {
-        -# $("#test").text("")
-        -# return true;
-      -# }
-    -# });  
-  -# });  
-  
 :javascript
   $("#edit_user").keyup(function (){
   

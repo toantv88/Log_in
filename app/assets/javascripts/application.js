@@ -17,5 +17,5 @@
 //= require_tree . 
 //= requery jquery.min
 //= requery jquery.validate
- // $(function(){ $(document).foundation(); });	
+// $(function(){ $(document).foundation(); });	
  
