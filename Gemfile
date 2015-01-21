@@ -39,5 +39,11 @@ gem 'pry'
 # gem 'debugger', group: [:development, :test]
 gem 'foundation-rails', "~> 5.1.1.0"
 gem "paperclip", "~> 4.2"
-gem "haml"
+gem "haml" 
+gem "delayed_job"
+gem 'delayed_job_active_record'
+gem "daemons"
+gem 'omniauth-facebook'
+gem "omniauth"
+gem "koala","~> 1.11.0rc" 
 
